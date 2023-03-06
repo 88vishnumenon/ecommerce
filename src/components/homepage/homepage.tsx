@@ -1,22 +1,48 @@
-import { useSelector } from "react-redux";
-import { useAppSelector } from "../../hooks/useReduxhooks";
+import { makeStyles } from '@material-ui/styles';
+import { Theme } from "@material-ui/core";
+
+import { useAppDispatch, useAppSelector } from "../../hooks/useReduxhooks";
 import { VProduct, VProductState } from "../../types/product.type";
+import Card from "../card/product-card";
 import Header from "../header/header";
+import { useEffect } from 'react';
+import { fetchAllProducts } from '../../store/actions/products.actions';
+
+
+const useStyles = makeStyles(
+    (theme:Theme) => ({
+      homepagWrapper:{
+        display:"flex",
+        displayDirection:"row",
+      }
+
+    }));
 
 function Homepage() {
 
+    // declare constants
+
+    const classes = useStyles();
+    const dispatch = useAppDispatch();
     const products:VProduct[] = useAppSelector((state)=>state.productsSlice.products);
     console.log(products);
 
+
+    useEffect(()=>{
+        dispatch(fetchAllProducts());
+        return () => {}
+      },[]);  
+
     return ( 
-        <section>
+        <section >
         <Header></Header>
-        <div>I am homepage</div>
+       { products &&   <section className={classes.homepagWrapper}>
         {
-            products.map((product:VProduct)=>{
-                return <div>{product.title}</div>
+            products.map((product:VProduct ,index:number)=>{
+                return <Card key={product.id} imageSrc={product.image} title={product.title} description={product.description} price={product.price}></Card>
             })
         }
+        </section>}
         </section>
      );
 }

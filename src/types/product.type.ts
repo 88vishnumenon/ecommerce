@@ -4,11 +4,12 @@ export interface VProduct{
     title:string,
     description:string,
     image:string,
-    quantityAvailable:number
+    price:string
 }
 
 
 export interface VProductState{
     products:VProduct[]
 }
+
 
