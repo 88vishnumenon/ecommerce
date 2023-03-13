@@ -9,7 +9,7 @@ const initialState:VProductState= {
         title:"test",
         description:"test",
         image:"string",
-        quantityAvailable:10
+        price:"10"
     },]
 }
 
@@ -21,7 +21,7 @@ export const productsSlice = createSlice({
           state.products = action.payload
       },
       setAllProducts:(state, action: PayloadAction<VProduct[]>)=>{
-          state.products = action.payload
+          state.products = action.payload // this should be
       },
     }
   });
