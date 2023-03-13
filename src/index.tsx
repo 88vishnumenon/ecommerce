@@ -10,6 +10,7 @@ import GlobalStyle from "./theme/globalStyles";
 import customTheme from "./theme/theme";
 import { ThemeProvider } from'@material-ui/styles';
 import { axiosInterceptor } from './interceptor/axios.interceptor';
+import "./styles/index.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
